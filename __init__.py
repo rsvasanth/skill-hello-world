@@ -30,6 +30,10 @@ class HelloWorldSkill(MycroftSkill):
         super(HelloWorldSkill, self).__init__(name="HelloWorldSkill")
 
     def initialize(self):
+        good_night_intent = IntentBuilder("GoodNightIntent"). \
+            require("GoodNightKeyword").build()
+        self.register_intent(good_night_intent, self.handle_good_night_intent)
+
         thank_you_intent = IntentBuilder("ThankYouIntent"). \
             require("ThankYouKeyword").build()
         self.register_intent(thank_you_intent, self.handle_thank_you_intent)
@@ -43,6 +47,9 @@ class HelloWorldSkill(MycroftSkill):
             require("HelloWorldKeyword").build()
         self.register_intent(hello_world_intent,
                              self.handle_hello_world_intent)
+
+    def handle_good_night_intent(self, message):
+        self.speak_dialog("good night")
 
     def handle_thank_you_intent(self, message):
         self.speak_dialog("welcome")
